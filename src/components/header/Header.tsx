@@ -33,7 +33,7 @@ export default function Header() {
         ))}
 
         <a href="/">
-          <Logo src={logo} alt="모아니스테이 로고" />
+          <Logo src={logo} alt="모아니스테이" />
         </a>
 
         {navListRight.map(({ name, pathname }, index) => (
