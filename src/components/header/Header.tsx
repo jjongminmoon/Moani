@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import logo from "../../assets/main/jejumoanistay.png";
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
+import { Link } from "react-router-dom";
 import { navListLeft, navListRight } from "../../data/navList";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -20,20 +21,26 @@ export default function Header() {
     <Section backgroundColor={scrollPostion > 0 ? "rgba(0, 0, 0, 0.7)" : "rgba(0, 0, 0, 0.2)"}>
       <Wrapper>
         {params == "/" ? (
-          <Link className="move-preview" to="move-preview" spy={true} smooth={true} offset={-170}>
+          <ScrollLink
+            className="move-preview"
+            to="move-preview"
+            spy={true}
+            smooth={true}
+            offset={-170}
+          >
             PREVIEW
-          </Link>
+          </ScrollLink>
         ) : (
           <a href="/">PREVIEW</a>
         )}
         {navListLeft.map(({ name, pathname }, index) => (
-          <a href={pathname} key={index}>
+          <Link to={pathname} key={index}>
             {name}
-          </a>
+          </Link>
         ))}
 
         <a href="/">
-          <Logo src={logo} alt="모아니스테이 로고2" />
+          <Logo src={logo} alt="모아니스테이 로고" />
         </a>
 
         {navListRight.map(({ name, pathname }, index) => (
