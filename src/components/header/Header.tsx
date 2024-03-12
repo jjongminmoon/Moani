@@ -31,7 +31,7 @@ export default function Header() {
             PREVIEW
           </ScrollLink>
         ) : (
-          <a href="/">PREVIEW</a>
+          <Link to="/">PREVIEW</Link>
         )}
         {navListLeft.map(({ name, pathname }, index) => (
           <Link to={pathname} key={index}>
@@ -39,14 +39,14 @@ export default function Header() {
           </Link>
         ))}
 
-        <a href="/">
+        <Link to="/">
           <Logo src={logo} alt="모아니스테이 로고" />
-        </a>
+        </Link>
 
         {navListRight.map(({ name, pathname }, index) => (
-          <a href={pathname} key={index}>
+          <Link to={pathname} key={index}>
             {name}
-          </a>
+          </Link>
         ))}
       </Wrapper>
     </Section>

@@ -62,8 +62,6 @@ export default function Footer() {
     }
   };
 
-  console.log(user);
-
   return (
     <Section>
       <Name>모아니스테이</Name>
@@ -72,7 +70,7 @@ export default function Footer() {
         <p>|</p>
         <p>대표자 : 손명희</p>
         <p>|</p>
-        <a href="tel:010-8652-2178">연락처 : 010-8652-2178</a>
+        <Link to="tel:010-8652-2178">연락처 : 010-8652-2178</Link>
         <p>|</p>
         <p>사업자 등록번호 : 173-22-01691</p>
       </Wrapper>
