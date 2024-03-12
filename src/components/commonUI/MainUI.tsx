@@ -7,34 +7,38 @@ import reviewsImage from "../../assets/room/externalView5.jpeg";
 import noticeImage from "../../assets/room/externalView3.jpeg";
 import { BiArrowFromTop } from "react-icons/bi";
 import { useLocation } from "react-router-dom";
+import { Suspense } from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function MainUI({ children }: { children: React.ReactNode }) {
   const params = useLocation().pathname;
 
   return (
-    <Section>
-      <Wrapper height={params == "/" ? "100vh" : "800px"}>
-        <Image
-          src={
-            params == "/"
-              ? mainImage
-              : params == "/room"
-              ? roomImage
-              : params == "/reservation"
-              ? reservImage
-              : params == "/locations"
-              ? locationsImage
-              : params == "/reviews"
-              ? reviewsImage
-              : noticeImage
-          }
-          alt="메인 이미지"
-          height={params == "/" ? "100%" : "800px"}
-        />
-        <Arrow display={params == "/" ? "block" : "none"} />
-      </Wrapper>
-      {children}
-    </Section>
+    <Suspense fallback={<LoadingSpinner />}>
+      <Section>
+        <Wrapper height={params == "/" ? "100vh" : "800px"}>
+          <Image
+            src={
+              params == "/"
+                ? mainImage
+                : params == "/room"
+                ? roomImage
+                : params == "/reservation"
+                ? reservImage
+                : params == "/locations"
+                ? locationsImage
+                : params == "/reviews"
+                ? reviewsImage
+                : noticeImage
+            }
+            alt="메인 이미지"
+            height={params == "/" ? "100%" : "800px"}
+          />
+          <Arrow display={params == "/" ? "block" : "none"} />
+        </Wrapper>
+        {children}
+      </Section>
+    </Suspense>
   );
 }
 
