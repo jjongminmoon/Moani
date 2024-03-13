@@ -9,10 +9,12 @@ type Props = {
 };
 
 export default function useNoticeDetail() {
-  const { noticeList } = useNoticeList();
+  const { noticeData } = useNoticeList();
   const { id } = useParams();
 
-  const notice_detail: Props | undefined = noticeList.find((notice: Props) => notice.id == id);
+  const notice_detail: Props | undefined = noticeData.noticeList?.find(
+    (notice: Props) => notice.id == id
+  );
 
   return { notice_detail };
 }

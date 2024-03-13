@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { dbService } from "../services/firebase";
 
 export default function useReviewList() {
-  const [reviewList, setReviewList] = useState<any>([]);
+  const [reviewData, setReviewData] = useState<any>([]);
 
   useEffect(() => {
     const q = query(collection(dbService, "reviews"), orderBy("createdAt", "desc"));
@@ -15,7 +15,12 @@ export default function useReviewList() {
         };
       });
 
-      setReviewList(arr);
+      setReviewData({
+        perPage: 12,
+        totalReviews: arr.length,
+        totalPages: Math.ceil(arr.length / 12),
+        reviewList: arr
+      });
     });
 
     return () => {
@@ -23,5 +28,5 @@ export default function useReviewList() {
     };
   }, []);
 
-  return { reviewList };
+  return { reviewData };
 }

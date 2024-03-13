@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { dbService } from "../services/firebase";
 
 export default function useNoticeList() {
-  const [noticeList, setNoticeList] = useState<any>([]);
+  const [noticeData, setNoticeData] = useState<any>([]);
 
   useEffect(() => {
-    const q = query(collection(dbService, "notices"), orderBy("createdAt", "asc"));
+    const q = query(collection(dbService, "notices"), orderBy("createdAt", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const arr = querySnapshot.docs.map((doc) => {
         return {
@@ -15,7 +15,12 @@ export default function useNoticeList() {
         };
       });
 
-      setNoticeList(arr);
+      setNoticeData({
+        perPage: 10,
+        totalNotices: arr.length,
+        totalPages: Math.ceil(arr.length / 10),
+        noticeList: arr
+      });
     });
 
     return () => {
@@ -23,5 +28,5 @@ export default function useNoticeList() {
     };
   }, []);
 
-  return { noticeList };
+  return { noticeData };
 }
