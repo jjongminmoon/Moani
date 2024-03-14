@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Swal from "sweetalert2";
 import { SetStateAction } from "react";
 import { dbService } from "../../services/firebase";
 import { addDoc, collection } from "firebase/firestore";
@@ -13,26 +14,54 @@ type Props = {
 export default function UploadButton({ title, setOpenForm, content }: Props) {
   const dateString = getToday();
 
-  const handleUpload = async () => {
+  const handleUpload = () => {
     const coll = collection(dbService, "notices");
 
     if (title == null) {
-      alert("제목을 입력해주세요.");
+      Swal.fire({
+        text: "제목을 입력해주세요!",
+        icon: "warning",
+        showConfirmButton: false,
+        timer: 1500
+      });
+
       return;
     } else if (content == null) {
-      alert("내용을 입력해주세요.");
+      Swal.fire({
+        text: "내용을 입력해주세요!",
+        icon: "warning",
+        showConfirmButton: false,
+        timer: 1500
+      });
+
       return;
     } else {
-      if (confirm("공지사항을 업로드하시겠습니까?")) {
-        await addDoc(coll, {
-          title: title,
-          content: content,
-          createdAt: dateString
-        });
+      Swal.fire({
+        text: "공지사항을 업로드하시겠습니까?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#000",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "업로드",
+        cancelButtonText: "취소"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          addDoc(coll, {
+            title: title,
+            content: content,
+            createdAt: dateString
+          });
 
-        setOpenForm(false);
-        alert("공지사항 업로드가 완료되었습니다.");
-      }
+          setOpenForm(false);
+
+          Swal.fire({
+            text: "업로드 완료",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      });
     }
   };
 

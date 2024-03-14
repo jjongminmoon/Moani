@@ -5,6 +5,7 @@ import reserveIcon from "../../assets/icon/reserve-icon.png";
 import airbnbIcon from "../../assets/icon/airbnb-icon.png";
 import yeogiIcon from "../../assets/icon/yeogi-icon.png";
 import yanoljaIcon from "../../assets/icon/yanolja-icon.png";
+import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -55,11 +56,26 @@ export default function Footer() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    if (confirm("로그아웃 하시겠습니까?")) {
-      signOut(auth);
-      alert("정상적으로 로그아웃 되었스니다.");
-      navigate("/");
-    }
+    Swal.fire({
+      text: "로그아웃 하시겠습니까?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#000",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "로그아웃",
+      cancelButtonText: "취소"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        signOut(auth);
+        Swal.fire({
+          text: "로그아웃 되었습니다",
+          icon: "info",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    });
+    navigate("/");
   };
 
   return (

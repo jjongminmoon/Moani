@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import useNoticeDetail from "../hooks/notice-detail";
 import ContentViewer from "../components/notice-detail/ContentViewer";
+import Swal from "sweetalert2";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import { useNavigate, useParams } from "react-router-dom";
@@ -16,14 +17,36 @@ export default function NoticeDetailPage() {
   const handleRemoveNotice = () => {
     const docRef = doc(dbService, "notices", String(id));
 
-    if (confirm("공지사항을 삭제하시겠습니까?")) {
-      deleteDoc(docRef)
-        .then(() => {
-          alert("공지사항이 삭제되었습니다.");
-          navigate("/notices");
-        })
-        .catch((err) => alert(err));
-    }
+    Swal.fire({
+      text: "공지사항을 삭제하시겠습니까?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#000",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteDoc(docRef)
+          .then(() => {
+            Swal.fire({
+              text: "삭제 완료",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            navigate("/notices");
+          })
+          .catch((err) =>
+            Swal.fire({
+              text: err,
+              icon: "error",
+              confirmButtonText: "확인",
+              confirmButtonColor: "#000"
+            })
+          );
+      }
+    });
   };
 
   return (

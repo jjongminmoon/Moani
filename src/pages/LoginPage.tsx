@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import CommonTitle from "../components/commonUI/CommonTitle";
+import Swal from "sweetalert2";
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebase";
@@ -25,10 +26,22 @@ export default function LoginPage() {
 
     await signInWithEmailAndPassword(auth, id, pwd)
       .then(() => {
-        alert("정상적으로 로그인 되었습니다.");
+        Swal.fire({
+          text: "로그인 성공",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500
+        });
         navigate("/");
       })
-      .catch((err) => alert(err));
+      .catch((err) =>
+        Swal.fire({
+          text: err,
+          icon: "error",
+          confirmButtonText: "확인",
+          confirmButtonColor: "#000"
+        })
+      );
   };
 
   return (

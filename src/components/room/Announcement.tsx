@@ -17,7 +17,7 @@ export default function Announcement() {
       <p>
         {"(안내된 조식 외 사진 등에 배치된 것은 상황에 따라 다르거나 제공되지 않을 수 있습니다😂)"}
       </p>
-      <Link className="notice" to="/">
+      <Link className="notice" to="/notice/g9iK0EZg8nwGCsKJXAWT">
         📢 숙소 공지 사항으로 이동 (!필독!)
       </Link>
     </CommonAnnouncement>

@@ -12,15 +12,14 @@ type Props = {
 };
 
 export default function NoticeList() {
-  const { noticeData } = useNoticeList();
   const [currentPage, setCurrentPage] = useState(1);
+  const { noticeData } = useNoticeList();
   const reviewsPerPage = noticeData.perPage;
   const firstReviewIndex = (currentPage - 1) * reviewsPerPage;
   const lastReviewIndex = firstReviewIndex + reviewsPerPage;
   const noticeList = noticeData?.noticeList?.slice(firstReviewIndex, lastReviewIndex);
   const navigate = useNavigate();
 
-  console.log(String(currentPage - 1));
   return (
     <>
       <Container>
