@@ -64,18 +64,21 @@ export default function Footer() {
       cancelButtonColor: "#d33",
       confirmButtonText: "로그아웃",
       cancelButtonText: "취소"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        signOut(auth);
-        Swal.fire({
-          text: "로그아웃 되었습니다",
-          icon: "info",
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
-    });
-    navigate("/");
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          signOut(auth);
+          Swal.fire({
+            text: "로그아웃 되었습니다",
+            icon: "info",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      })
+      .then(() => {
+        navigate("/");
+      });
   };
 
   return (

@@ -2,12 +2,14 @@ import styled from "@emotion/styled";
 import useReviewList from "../../hooks/reviews";
 import PaginationButton from "../commonUI/PaginationButton";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { deleteDoc, doc } from "firebase/firestore";
 import { dbService } from "../../services/firebase";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 export default function ReviewList() {
+  const user = useContext(AuthContext);
   const { reviewData } = useReviewList();
   const [currentPage, setCurrentPage] = useState(1);
   const reviewsPerPage = reviewData.perPage;
@@ -57,7 +59,9 @@ export default function ReviewList() {
         {reviewList?.map(({ image, id }: { image: string; id: string }) => (
           <Card key={image}>
             <Image src={image} alt="고객 리뷰 이미지" />
-            <RemoveButton onClick={() => handleRemoveNotice(id)}>삭제</RemoveButton>
+            {user != null ? (
+              <RemoveButton onClick={() => handleRemoveNotice(id)}>삭제</RemoveButton>
+            ) : null}
           </Card>
         ))}
       </Container>

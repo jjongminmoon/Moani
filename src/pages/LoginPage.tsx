@@ -32,6 +32,7 @@ export default function LoginPage() {
           showConfirmButton: false,
           timer: 1500
         });
+
         navigate("/");
       })
       .catch((err) =>
