@@ -6,13 +6,11 @@ import Swal from "sweetalert2";
 import { AuthProvider } from "./contexts/AuthProvider";
 import { useMediaQuery } from "react-responsive";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 function App() {
   const isMobile = useMediaQuery({
     query: "(max-width: 1024px)"
   });
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (isMobile) {
