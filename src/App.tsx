@@ -19,16 +19,11 @@ function App() {
       Swal.fire({
         text: "모바일 페이지는 준비중입니다",
         icon: "warning",
-        showCancelButton: true,
         confirmButtonColor: "coral",
-        cancelButtonColor: "gray",
-        confirmButtonText: "인스타 계정 이동",
-        cancelButtonText: "확인"
+        confirmButtonText: "인스타 계정 이동"
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("https://www.instagram.com/jejumoanistay/");
-        } else {
-          navigate(-1);
+          window.open("https://www.instagram.com/jejumoanistay/");
         }
       });
     }
