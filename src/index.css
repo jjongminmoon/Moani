@@ -10,16 +10,9 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family: "GmarketSansMedium";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
 body {
   min-width: 1280px;
+  width: 100%;
   margin: 0;
   font-family: "Happiness-Sans-Bold";
   -webkit-font-smoothing: antialiased;

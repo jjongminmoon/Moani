@@ -32,9 +32,9 @@ export default function MainUI({ children }: { children: React.ReactNode }) {
                 : noticeImage
             }
             alt="메인 이미지"
-            height={params == "/" ? "100%" : "800px"}
+            height={params == "/" ? "100vh" : "800px"}
           />
-          <Arrow display={params == "/" ? "block" : "none"} />
+          <Arrow bottom={params == "/" ? "" : "710px"} />
         </Wrapper>
         {children}
       </Section>
@@ -46,26 +46,26 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `;
 
 const Wrapper = styled.div<{ height: string }>`
+  width: 100%;
   height: ${(props) => props.height};
 `;
 
 const Image = styled.img<{ height: string }>`
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   height: ${(props) => props.height};
   object-fit: cover;
   z-index: -50;
 `;
 
-const Arrow = styled(BiArrowFromTop)<{ display: string }>`
-  display: ${(props) => props.display};
+const Arrow = styled(BiArrowFromTop)<{ bottom: string }>`
   position: absolute;
   left: 48%;
+  top: ${(props) => props.bottom};
   color: white;
   font-size: 70px;
   animation: motion 0.3s linear 0s infinite alternate;

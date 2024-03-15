@@ -33,6 +33,7 @@ export default function Header() {
         ) : (
           <Link to="/">PREVIEW</Link>
         )}
+
         {navListLeft.map(({ name, pathname }, index) => (
           <Link to={pathname} key={index}>
             {name}
@@ -55,10 +56,6 @@ export default function Header() {
 
 const Section = styled.header<{ backgroundColor: string }>`
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
